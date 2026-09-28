@@ -1,4 +1,4 @@
-import cv2
+import cv2 
 import math
 # Aplicar las funciones al contorno
 # Aplicammos cv2.approxPolyDP para simplificar la forma y contar el numero de lados de la misma
@@ -12,7 +12,7 @@ import math
 # Devuelve la letra que representa su categoria
 
 def clasificaFig(contorno) -> str:
-    perimetro = cv2.arcLenght(contorno, True)
+    perimetro = cv2.arcLength(contorno, True)
     epsilon = 0.02 * perimetro
     aproximacion = cv2.approxPolyDP(contorno, epsilon,True)
 

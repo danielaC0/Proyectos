@@ -2,6 +2,7 @@ import sys
 from lector import cargarImg
 from procesador import obtenFig
 from clasificador import clasificaFig
+
 def main():
     if len(sys.argv) < 2:
         print("Proporcionar ruta de la imagen .bmp")
@@ -28,6 +29,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
        
