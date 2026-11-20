@@ -1,4 +1,4 @@
-import cv2
+import cv2 
 import os
 import numpy as np
 #Manejar la entrada de los archivos de las imagenes y controlar los errores
