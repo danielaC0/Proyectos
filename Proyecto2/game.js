@@ -11,18 +11,26 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     const order = ['easy', 'intermediate', 'hard'];
     let actualLevelKey = 'easy';
+    let totalMines = 0;
+    let flagsUsed = 0;
+    let isGameOver = false;
+    let squares = [];
 
     /*Inicializacion del juego*/
     function initGame(levelKey){
         actualLevelKey = levelKey;
         const {cols, rows, mines, cellsize} = levels[levelKey];
 
+        totalMines = mines;
+        flagsUsed = 0;
+        isGameOver = false;
+
         if(levelSelect){
             levelSelect.value = levelKey;
         }
         /*Reiniciar el tablero*/
         grid.innerHTML = '';
-        flagsLeft.textContent = mines;
+        flagsLeft.textContent = totalMines - mines;
 
         /*Ajustar el tablero al al nivel actual*/
         
@@ -45,8 +53,43 @@ document.addEventListener('DOMContentLoaded', function() {
             square.style.width = `${cellsize}px`;
             square.style.height = `${cellsize}px`;
             square.style.lineHeight = `${cellsize -2}px`;
-            grid.appendChild(square)
+
+            /*Usar click derecho para poner o quitar banderas*/
+            square.addEventListener('contextmenu', function(e){
+                e.preventDefault();
+                toggleFlag(square);
+            });
+            grid.appendChild(square);
+            squares.push(square);
         }
+    }
+
+    /*Funcion para generar las minas de manera aleatoria*/
+    function createMines(totalSquares, minesCount, boardSquares){
+        const minesCnt = Math.min(minesCount,totalSquares);
+        const minePosition = new Set();
+
+        while(minePosition.size < minesCnt){
+            const randomIndex = Math.floor(Math.random()*totalSquares);
+            minePosition.add(randomIndex);
+        }
+        minePosition.forEach((index) =>{
+            boardSquares[index].classList.add('mine');
+        });
+    }
+    function toggleFlag(square){
+        if(isGameOver || square.classList.contains('checked')) return;
+        if(!square.classList.contains('flag')){
+            if(flagsUsed >= totalMines) return;
+            square.classList.add('flag');
+            square.textContent = '🚩';
+            flagsUsed++;
+        }else{
+            square.classList.remove('flag');
+            square.textContent = '';
+            flagsUsed--;
+        }
+        flagsLeft.textContent = totalMines-flagsUsed
     }
     
     if(levelSelect){

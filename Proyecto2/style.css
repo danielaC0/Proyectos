@@ -26,3 +26,6 @@
     font-family: "Roboto Mono", monospace;
     font-size: 14px;
 }
+.square.mine{
+    background-color: #f8b4b4;
+}
