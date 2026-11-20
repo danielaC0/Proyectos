@@ -1,24 +1,28 @@
 .container {
-    width: 500px;
+    width: fit-content;
+    margin-left: 50px;
+    margin-top: 20px;
 }
 .grid {
-    height: 420px;
-    width: 420px;
+    box-sizing: content-box;
     display: flex;
     flex-wrap: wrap;
     background-color: #dcd6bc;
-    margin-left: 50px;
-    margin-top: 20px;
     border: 10px solid #dcd6bc;
     margin-bottom: 10px;
 }
 
-div{
-    font-size: 25px;
+.square{
+    box-sizing: border-box;
+    border: solid 1px red;
+    font-size: 20px;
     text-align: center;
     font-family: "Roboto Mono", monospace;
-    width: 40px;
-    height: 40px;
-    border: solid 1px red;
-    box-sizing: border-box;
+    user-select: none;
+}
+
+#flags-left,
+#resultGame{
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
 }
