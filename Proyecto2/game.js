@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         /*Crear casillas*/
         createBoard(cols,rows,cellsize);
+        createMines(cols * rows, totalMines, squares);
 
     }
     /*Creando el tablero*/
@@ -61,12 +62,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             grid.appendChild(square);
             squares.push(square);
+
+            /*Usar click izquierdo para mostrar las casillas*/
+
         }
     }
 
     /*Funcion para generar las minas de manera aleatoria*/
     function createMines(totalSquares, minesCount, boardSquares){
-        const minesCnt = Math.min(minesCount,totalSquares);
+        const minesCnt = Math.min(minesCount,totalSquares); /*No puede haber mas minas que casillas*/
         const minePosition = new Set();
 
         while(minePosition.size < minesCnt){
@@ -74,9 +78,13 @@ document.addEventListener('DOMContentLoaded', function() {
             minePosition.add(randomIndex);
         }
         minePosition.forEach((index) =>{
-            boardSquares[index].classList.add('mine');
+            boardSquares[index].classList.add('mines');
         });
     }
+
+
+
+    /*Funcion para marcar/ quitar las banderas de las casillas*/
     function toggleFlag(square){
         if(isGameOver || square.classList.contains('checked')) return;
         if(!square.classList.contains('flag')){
